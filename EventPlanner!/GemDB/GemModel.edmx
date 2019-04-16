@@ -1,0 +1,473 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="GemDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Clients">
+          <Key>
+            <PropertyRef Name="ClientID" />
+          </Key>
+          <Property Name="ClientID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Address" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Phone" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Directors">
+          <Key>
+            <PropertyRef Name="D_ID" />
+          </Key>
+          <Property Name="D_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Address" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Phone" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="EventManager">
+          <Key>
+            <PropertyRef Name="EM_ID" />
+          </Key>
+          <Property Name="EM_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Address" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Phone" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="OrderEvents">
+          <Key>
+            <PropertyRef Name="EventID" />
+          </Key>
+          <Property Name="EventID" Type="int" Nullable="false" />
+          <Property Name="ClientID" Type="int" Nullable="false" />
+          <Property Name="EventType" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="DateOfEvent" Type="date" Nullable="false" />
+          <Property Name="TimeOfEvent" Type="time" Precision="7" />
+          <Property Name="NoOfGuest" Type="int" Nullable="false" />
+          <Property Name="V_ID" Type="int" />
+          <Property Name="P_ID" Type="int" />
+          <Property Name="EM_Fee" Type="int" Nullable="false" />
+          <Property Name="CateringCost" Type="int" Nullable="false" />
+          <Property Name="TotalCost" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="OrganizeEvents">
+          <Key>
+            <PropertyRef Name="EventID" />
+            <PropertyRef Name="EM_ID" />
+          </Key>
+          <Property Name="EventID" Type="int" Nullable="false" />
+          <Property Name="EM_ID" Type="int" Nullable="false" />
+          <Property Name="EventStatus" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="PaymentStatus" Type="varchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Photographers">
+          <Key>
+            <PropertyRef Name="P_ID" />
+          </Key>
+          <Property Name="P_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Phone" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Fee" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Vanues">
+          <Key>
+            <PropertyRef Name="V_ID" />
+          </Key>
+          <Property Name="V_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="1000" Nullable="false" />
+          <Property Name="Address" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Phone" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="V_Fee" Type="int" Nullable="false" />
+          <Property Name="Decor_Fee" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_OrderEvents_Clients">
+          <End Role="Clients" Type="Self.Clients" Multiplicity="1" />
+          <End Role="OrderEvents" Type="Self.OrderEvents" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clients">
+              <PropertyRef Name="ClientID" />
+            </Principal>
+            <Dependent Role="OrderEvents">
+              <PropertyRef Name="ClientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderEvents_Photographers">
+          <End Role="Photographers" Type="Self.Photographers" Multiplicity="0..1" />
+          <End Role="OrderEvents" Type="Self.OrderEvents" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Photographers">
+              <PropertyRef Name="P_ID" />
+            </Principal>
+            <Dependent Role="OrderEvents">
+              <PropertyRef Name="P_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderEvents_Vanues">
+          <End Role="Vanues" Type="Self.Vanues" Multiplicity="0..1" />
+          <End Role="OrderEvents" Type="Self.OrderEvents" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vanues">
+              <PropertyRef Name="V_ID" />
+            </Principal>
+            <Dependent Role="OrderEvents">
+              <PropertyRef Name="V_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrganizeEvents_EventManager">
+          <End Role="EventManager" Type="Self.EventManager" Multiplicity="1" />
+          <End Role="OrganizeEvents" Type="Self.OrganizeEvents" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EventManager">
+              <PropertyRef Name="EM_ID" />
+            </Principal>
+            <Dependent Role="OrganizeEvents">
+              <PropertyRef Name="EM_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrganizeEvents_OrderEvents">
+          <End Role="OrderEvents" Type="Self.OrderEvents" Multiplicity="1" />
+          <End Role="OrganizeEvents" Type="Self.OrganizeEvents" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OrderEvents">
+              <PropertyRef Name="EventID" />
+            </Principal>
+            <Dependent Role="OrganizeEvents">
+              <PropertyRef Name="EventID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="GemDBModelStoreContainer">
+          <EntitySet Name="Clients" EntityType="Self.Clients" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Directors" EntityType="Self.Directors" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EventManager" EntityType="Self.EventManager" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OrderEvents" EntityType="Self.OrderEvents" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OrganizeEvents" EntityType="Self.OrganizeEvents" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Photographers" EntityType="Self.Photographers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Vanues" EntityType="Self.Vanues" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_OrderEvents_Clients" Association="Self.FK_OrderEvents_Clients">
+            <End Role="Clients" EntitySet="Clients" />
+            <End Role="OrderEvents" EntitySet="OrderEvents" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderEvents_Photographers" Association="Self.FK_OrderEvents_Photographers">
+            <End Role="Photographers" EntitySet="Photographers" />
+            <End Role="OrderEvents" EntitySet="OrderEvents" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderEvents_Vanues" Association="Self.FK_OrderEvents_Vanues">
+            <End Role="Vanues" EntitySet="Vanues" />
+            <End Role="OrderEvents" EntitySet="OrderEvents" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrganizeEvents_EventManager" Association="Self.FK_OrganizeEvents_EventManager">
+            <End Role="EventManager" EntitySet="EventManager" />
+            <End Role="OrganizeEvents" EntitySet="OrganizeEvents" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrganizeEvents_OrderEvents" Association="Self.FK_OrganizeEvents_OrderEvents">
+            <End Role="OrderEvents" EntitySet="OrderEvents" />
+            <End Role="OrganizeEvents" EntitySet="OrganizeEvents" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="GemDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Clients">
+          <Key>
+            <PropertyRef Name="ClientID" />
+          </Key>
+          <Property Name="ClientID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Address" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="OrderEvents" Relationship="Self.FK_OrderEvents_Clients" FromRole="Clients" ToRole="OrderEvents" />
+        </EntityType>
+        <EntityType Name="Directors">
+          <Key>
+            <PropertyRef Name="D_ID" />
+          </Key>
+          <Property Name="D_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Address" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="EventManager">
+          <Key>
+            <PropertyRef Name="EM_ID" />
+          </Key>
+          <Property Name="EM_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Address" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="OrganizeEvents" Relationship="Self.FK_OrganizeEvents_EventManager" FromRole="EventManager" ToRole="OrganizeEvents" />
+        </EntityType>
+        <EntityType Name="OrderEvents">
+          <Key>
+            <PropertyRef Name="EventID" />
+          </Key>
+          <Property Name="EventID" Type="Int32" Nullable="false" />
+          <Property Name="ClientID" Type="Int32" Nullable="false" />
+          <Property Name="EventType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DateOfEvent" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="TimeOfEvent" Type="Time" Precision="7" />
+          <Property Name="NoOfGuest" Type="Int32" Nullable="false" />
+          <Property Name="V_ID" Type="Int32" />
+          <Property Name="P_ID" Type="Int32" />
+          <Property Name="EM_Fee" Type="Int32" Nullable="false" />
+          <Property Name="CateringCost" Type="Int32" Nullable="false" />
+          <Property Name="TotalCost" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Clients" Relationship="Self.FK_OrderEvents_Clients" FromRole="OrderEvents" ToRole="Clients" />
+          <NavigationProperty Name="Photographers" Relationship="Self.FK_OrderEvents_Photographers" FromRole="OrderEvents" ToRole="Photographers" />
+          <NavigationProperty Name="Vanues" Relationship="Self.FK_OrderEvents_Vanues" FromRole="OrderEvents" ToRole="Vanues" />
+          <NavigationProperty Name="OrganizeEvents" Relationship="Self.FK_OrganizeEvents_OrderEvents" FromRole="OrderEvents" ToRole="OrganizeEvents" />
+        </EntityType>
+        <EntityType Name="OrganizeEvents">
+          <Key>
+            <PropertyRef Name="EventID" />
+            <PropertyRef Name="EM_ID" />
+          </Key>
+          <Property Name="EventID" Type="Int32" Nullable="false" />
+          <Property Name="EM_ID" Type="Int32" Nullable="false" />
+          <Property Name="EventStatus" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PaymentStatus" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="EventManager" Relationship="Self.FK_OrganizeEvents_EventManager" FromRole="OrganizeEvents" ToRole="EventManager" />
+          <NavigationProperty Name="OrderEvents" Relationship="Self.FK_OrganizeEvents_OrderEvents" FromRole="OrganizeEvents" ToRole="OrderEvents" />
+        </EntityType>
+        <EntityType Name="Photographers">
+          <Key>
+            <PropertyRef Name="P_ID" />
+          </Key>
+          <Property Name="P_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Phone" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Fee" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="OrderEvents" Relationship="Self.FK_OrderEvents_Photographers" FromRole="Photographers" ToRole="OrderEvents" />
+        </EntityType>
+        <EntityType Name="Vanues">
+          <Key>
+            <PropertyRef Name="V_ID" />
+          </Key>
+          <Property Name="V_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Address" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="V_Fee" Type="Int32" Nullable="false" />
+          <Property Name="Decor_Fee" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="OrderEvents" Relationship="Self.FK_OrderEvents_Vanues" FromRole="Vanues" ToRole="OrderEvents" />
+        </EntityType>
+        <Association Name="FK_OrderEvents_Clients">
+          <End Role="Clients" Type="Self.Clients" Multiplicity="1" />
+          <End Role="OrderEvents" Type="Self.OrderEvents" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clients">
+              <PropertyRef Name="ClientID" />
+            </Principal>
+            <Dependent Role="OrderEvents">
+              <PropertyRef Name="ClientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrganizeEvents_EventManager">
+          <End Role="EventManager" Type="Self.EventManager" Multiplicity="1" />
+          <End Role="OrganizeEvents" Type="Self.OrganizeEvents" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EventManager">
+              <PropertyRef Name="EM_ID" />
+            </Principal>
+            <Dependent Role="OrganizeEvents">
+              <PropertyRef Name="EM_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderEvents_Photographers">
+          <End Role="Photographers" Type="Self.Photographers" Multiplicity="0..1" />
+          <End Role="OrderEvents" Type="Self.OrderEvents" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Photographers">
+              <PropertyRef Name="P_ID" />
+            </Principal>
+            <Dependent Role="OrderEvents">
+              <PropertyRef Name="P_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderEvents_Vanues">
+          <End Role="Vanues" Type="Self.Vanues" Multiplicity="0..1" />
+          <End Role="OrderEvents" Type="Self.OrderEvents" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vanues">
+              <PropertyRef Name="V_ID" />
+            </Principal>
+            <Dependent Role="OrderEvents">
+              <PropertyRef Name="V_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrganizeEvents_OrderEvents">
+          <End Role="OrderEvents" Type="Self.OrderEvents" Multiplicity="1" />
+          <End Role="OrganizeEvents" Type="Self.OrganizeEvents" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OrderEvents">
+              <PropertyRef Name="EventID" />
+            </Principal>
+            <Dependent Role="OrganizeEvents">
+              <PropertyRef Name="EventID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="GemDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Clients" EntityType="Self.Clients" />
+          <EntitySet Name="Directors" EntityType="Self.Directors" />
+          <EntitySet Name="EventManager" EntityType="Self.EventManager" />
+          <EntitySet Name="OrderEvents" EntityType="Self.OrderEvents" />
+          <EntitySet Name="OrganizeEvents" EntityType="Self.OrganizeEvents" />
+          <EntitySet Name="Photographers" EntityType="Self.Photographers" />
+          <EntitySet Name="Vanues" EntityType="Self.Vanues" />
+          <AssociationSet Name="FK_OrderEvents_Clients" Association="Self.FK_OrderEvents_Clients">
+            <End Role="Clients" EntitySet="Clients" />
+            <End Role="OrderEvents" EntitySet="OrderEvents" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrganizeEvents_EventManager" Association="Self.FK_OrganizeEvents_EventManager">
+            <End Role="EventManager" EntitySet="EventManager" />
+            <End Role="OrganizeEvents" EntitySet="OrganizeEvents" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderEvents_Photographers" Association="Self.FK_OrderEvents_Photographers">
+            <End Role="Photographers" EntitySet="Photographers" />
+            <End Role="OrderEvents" EntitySet="OrderEvents" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderEvents_Vanues" Association="Self.FK_OrderEvents_Vanues">
+            <End Role="Vanues" EntitySet="Vanues" />
+            <End Role="OrderEvents" EntitySet="OrderEvents" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrganizeEvents_OrderEvents" Association="Self.FK_OrganizeEvents_OrderEvents">
+            <End Role="OrderEvents" EntitySet="OrderEvents" />
+            <End Role="OrganizeEvents" EntitySet="OrganizeEvents" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="GemDBModelStoreContainer" CdmEntityContainer="GemDBEntities">
+          <EntitySetMapping Name="Clients">
+            <EntityTypeMapping TypeName="GemDBModel.Clients">
+              <MappingFragment StoreEntitySet="Clients">
+                <ScalarProperty Name="ClientID" ColumnName="ClientID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Directors">
+            <EntityTypeMapping TypeName="GemDBModel.Directors">
+              <MappingFragment StoreEntitySet="Directors">
+                <ScalarProperty Name="D_ID" ColumnName="D_ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EventManager">
+            <EntityTypeMapping TypeName="GemDBModel.EventManager">
+              <MappingFragment StoreEntitySet="EventManager">
+                <ScalarProperty Name="EM_ID" ColumnName="EM_ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OrderEvents">
+            <EntityTypeMapping TypeName="GemDBModel.OrderEvents">
+              <MappingFragment StoreEntitySet="OrderEvents">
+                <ScalarProperty Name="EventID" ColumnName="EventID" />
+                <ScalarProperty Name="ClientID" ColumnName="ClientID" />
+                <ScalarProperty Name="EventType" ColumnName="EventType" />
+                <ScalarProperty Name="DateOfEvent" ColumnName="DateOfEvent" />
+                <ScalarProperty Name="TimeOfEvent" ColumnName="TimeOfEvent" />
+                <ScalarProperty Name="NoOfGuest" ColumnName="NoOfGuest" />
+                <ScalarProperty Name="V_ID" ColumnName="V_ID" />
+                <ScalarProperty Name="P_ID" ColumnName="P_ID" />
+                <ScalarProperty Name="EM_Fee" ColumnName="EM_Fee" />
+                <ScalarProperty Name="CateringCost" ColumnName="CateringCost" />
+                <ScalarProperty Name="TotalCost" ColumnName="TotalCost" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OrganizeEvents">
+            <EntityTypeMapping TypeName="GemDBModel.OrganizeEvents">
+              <MappingFragment StoreEntitySet="OrganizeEvents">
+                <ScalarProperty Name="EventID" ColumnName="EventID" />
+                <ScalarProperty Name="EM_ID" ColumnName="EM_ID" />
+                <ScalarProperty Name="EventStatus" ColumnName="EventStatus" />
+                <ScalarProperty Name="PaymentStatus" ColumnName="PaymentStatus" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Photographers">
+            <EntityTypeMapping TypeName="GemDBModel.Photographers">
+              <MappingFragment StoreEntitySet="Photographers">
+                <ScalarProperty Name="P_ID" ColumnName="P_ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Fee" ColumnName="Fee" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Vanues">
+            <EntityTypeMapping TypeName="GemDBModel.Vanues">
+              <MappingFragment StoreEntitySet="Vanues">
+                <ScalarProperty Name="V_ID" ColumnName="V_ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="V_Fee" ColumnName="V_Fee" />
+                <ScalarProperty Name="Decor_Fee" ColumnName="Decor_Fee" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

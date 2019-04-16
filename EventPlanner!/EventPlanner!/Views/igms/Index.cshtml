@@ -1,0 +1,121 @@
+﻿@model IEnumerable<EventPlanner_.igm>
+
+@{
+	Layout = null;
+}
+
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="description" content="">
+	<meta name="author" content="">
+	<link rel="icon" href="../asset/gem.png">
+
+	<title>Gem Events</title>
+	<!-- Bootstrap core CSS -->
+	<link href="~/Content/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+	<!--fontawesome-->
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+	<!-- Custom styles for this template -->
+	<link rel="stylesheet" href="~/Content/CSS/about.css">
+	<!--font-family : poppins-->
+	<link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,700,900" rel="stylesheet">
+	<!--font-family : Tangerine-->
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Tangerine">
+	<!--font-family : Dancing Script-->
+	<link href="https://fonts.googleapis.com/css?family=Cormorant+Garamond" rel="stylesheet">
+</head>
+<body>
+
+	<header>
+		<nav class="navbar navbar-expand-md navbar-dark fixed-top " style="background-color: rgba(0,0,0,0.9);">
+			<div class="container">
+				@Html.ActionLink("Gem Events", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				<div class="collapse navbar-collapse" id="navbarCollapse">
+					<ul class="navbar-nav ml-auto">
+						<li class="nav-item ">
+							@Html.ActionLink("Home", "Index", "Home")
+						</li>
+						<li class="nav-item">
+							@Html.ActionLink("Service", "Service", "Home")
+						</li>
+						<li class="nav-item active">
+							@Html.ActionLink("About", "About", "Home")
+						</li>
+						<li class="nav-item">
+							@Html.ActionLink("Gellary", "Index", "igms")
+						</li>
+						<li class="nav-item">
+							@Html.ActionLink("Contact", "Contact", "Home")
+						</li>
+
+					</ul>
+				</div>
+			</div>
+		</nav>
+	</header>
+	<main role="main">
+		<section class="jumbotron text-center">
+			<div class="container">
+				<h1 class="jumbotron-heading">Gallery</h1>
+
+			</div>
+		</section>
+
+
+		<div class="container ">
+			@{
+				ViewBag.Title = "Index";
+			}
+
+
+
+			<table class="table">
+				<tr>
+					<th>
+						@Html.DisplayNameFor(model => model.ImagePath)
+					</th>
+					<th></th>
+				</tr>
+
+				@foreach (var item in Model)
+				{
+					<tr>
+						<td>
+							<img src="@Url.Content(item.ImagePath)" width="800" height="500" />
+						</td>
+					</tr>
+				}
+
+			</table>
+		</div>
+		<!-- FOOTER -->
+		<footer>
+			<p class="follow">
+				Follow Us
+				<i class="fab fa-facebook-f"></i>
+				<i class="fab fa-instagram"></i>
+				<i class="fab fa-twitter"></i>
+				<i class="fab fa-pinterest"></i>
+			</p>
+			<p>&copy;  COPYRIGHT 2018. ALL RIGHTS RESERVED,GEM EVENTS.</p>
+
+		</footer>
+		</div>
+	</main>
+
+	<!-- Bootstrap core JavaScript
+	================================================== -->
+
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+	<script>window.jQuery || document.write('<script src="~/Content/bootstrap/assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
+	<script src="~/Content/bootstrap/assets/js/vendor/popper.min.js"></script>
+	<script src="~/Content/bootstrap/dist/js/bootstrap.min.js"></script>
+	<script src="~/Content/bootstrap/assets/js/vendor/holder.min.js"></script>
+</body>
+</html>

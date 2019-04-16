@@ -1,0 +1,103 @@
+﻿@{
+	Layout = null;
+}
+
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="description" content="">
+	<meta name="author" content="">
+	<link rel="icon" href="~/Content/asset/gem.png">
+
+	<title>Gem Events</title>
+	<!-- Bootstrap core CSS -->
+	<link href="~/Content/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+	<!--fontawesome-->
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+	<!-- Custom styles for this template -->
+	<link rel="stylesheet" href="~/Content/CSS/about.css">
+	<!--font-family : poppins-->
+	<link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,700,900" rel="stylesheet">
+	<!--font-family : Tangerine-->
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Tangerine">
+	<!--font-family : Dancing Script-->
+	<link href="https://fonts.googleapis.com/css?family=Cormorant+Garamond" rel="stylesheet">
+</head>
+<body>
+
+
+
+	<div class="container">
+
+		<section class="jumbotron text-center">
+			<div class="container">
+				<h1 class="jumbotron-heading">Event Orders</h1>
+
+			</div>
+		</section>
+
+		@model IEnumerable<EventPlanner_.EventOrder>
+
+		@{
+			ViewBag.Title = "Index";
+		}
+
+
+		<p>
+			@Html.ActionLink("Create New Event Order", "Create")
+		</p>
+		<table class="table">
+			<tr>
+				<th>
+					@Html.DisplayNameFor(model => model.EventType)
+				</th>
+				<th>
+					@Html.DisplayNameFor(model => model.DateOfEvent)
+				</th>
+				<th>
+					@Html.DisplayNameFor(model => model.Venue)
+				</th>
+				<th>
+					@Html.DisplayNameFor(model => model.NoOfGuest)
+				</th>
+				<th></th>
+			</tr>
+
+			@foreach (var item in Model)
+			{
+				<tr>
+					<td>
+						@Html.DisplayFor(modelItem => item.EventType)
+					</td>
+					<td>
+						@Html.DisplayFor(modelItem => item.DateOfEvent)
+					</td>
+					<td>
+						@Html.DisplayFor(modelItem => item.Venue)
+					</td>
+					<td>
+						@Html.DisplayFor(modelItem => item.NoOfGuest)
+					</td>
+					<td>
+						@Html.ActionLink("Edit", "Edit", new { id = item.EventID }) |
+						@Html.ActionLink("Details", "Details", new { id = item.EventID }) |
+						@Html.ActionLink("Delete", "Delete", new { id = item.EventID })
+					</td>
+				</tr>
+			}
+
+		</table>
+		
+
+	<!-- Bootstrap core JavaScript
+	================================================== -->
+
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+	<script>window.jQuery || document.write('<script src="~/Content/bootstrap/assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
+	<script src="~/Content/bootstrap/assets/js/vendor/popper.min.js"></script>
+	<script src="~/Content/bootstrap/dist/js/bootstrap.min.js"></script>
+	<script src="~/Content/bootstrap/assets/js/vendor/holder.min.js"></script>
+</body>
+</html>

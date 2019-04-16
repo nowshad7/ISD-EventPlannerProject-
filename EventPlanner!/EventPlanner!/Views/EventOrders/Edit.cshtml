@@ -1,0 +1,112 @@
+﻿@{
+	Layout = null;
+}
+
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="description" content="">
+	<meta name="author" content="">
+	<link rel="icon" href="~/Content/asset/gem.png">
+
+	<title>Gem Events</title>
+	<!-- Bootstrap core CSS -->
+	<link href="~/Content/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+	<!--fontawesome-->
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+	<!-- Custom styles for this template -->
+	<link rel="stylesheet" href="~/Content/CSS/about.css">
+	<!--font-family : poppins-->
+	<link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,700,900" rel="stylesheet">
+	<!--font-family : Tangerine-->
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Tangerine">
+	<!--font-family : Dancing Script-->
+	<link href="https://fonts.googleapis.com/css?family=Cormorant+Garamond" rel="stylesheet">
+</head>
+<body>
+
+	
+
+	<div class="container">
+
+		<section class="jumbotron text-center">
+			<div class="container">
+				<h1 class="jumbotron-heading">Event Orders</h1>
+
+			</div>
+		</section>
+		@model EventPlanner_.EventOrder
+
+		@{
+			ViewBag.Title = "Edit";
+		}
+
+		<h2>Edit</h2>
+
+		@using (Html.BeginForm())
+		{
+			@Html.AntiForgeryToken()
+
+			<div class="form-horizontal">
+				<h4>EventOrder</h4>
+				<hr />
+				@Html.ValidationSummary(true, "", new { @class = "text-danger" })
+				@Html.HiddenFor(model => model.EventID)
+
+				<div class="form-group">
+					@Html.LabelFor(model => model.EventType, htmlAttributes: new { @class = "control-label col-md-2" })
+					<div class="col-md-10">
+						@Html.EditorFor(model => model.EventType, new { htmlAttributes = new { @class = "form-control" } })
+						@Html.ValidationMessageFor(model => model.EventType, "", new { @class = "text-danger" })
+					</div>
+				</div>
+
+				<div class="form-group">
+					@Html.LabelFor(model => model.DateOfEvent, htmlAttributes: new { @class = "control-label col-md-2" })
+					<div class="col-md-10">
+						@Html.EditorFor(model => model.DateOfEvent, new { htmlAttributes = new { @class = "form-control" } })
+						@Html.ValidationMessageFor(model => model.DateOfEvent, "", new { @class = "text-danger" })
+					</div>
+				</div>
+
+				<div class="form-group">
+					@Html.LabelFor(model => model.Venue, htmlAttributes: new { @class = "control-label col-md-2" })
+					<div class="col-md-10">
+						@Html.EditorFor(model => model.Venue, new { htmlAttributes = new { @class = "form-control" } })
+						@Html.ValidationMessageFor(model => model.Venue, "", new { @class = "text-danger" })
+					</div>
+				</div>
+
+				<div class="form-group">
+					@Html.LabelFor(model => model.NoOfGuest, htmlAttributes: new { @class = "control-label col-md-2" })
+					<div class="col-md-10">
+						@Html.EditorFor(model => model.NoOfGuest, new { htmlAttributes = new { @class = "form-control" } })
+						@Html.ValidationMessageFor(model => model.NoOfGuest, "", new { @class = "text-danger" })
+					</div>
+				</div>
+
+				<div class="form-group">
+					<div class="col-md-offset-2 col-md-10">
+						<input type="submit" value="Save" class="btn btn-default" />
+					</div>
+				</div>
+			</div>
+		}
+
+		<div>
+			@Html.ActionLink("Back to List", "Index")
+		</div>
+		
+
+	<!-- Bootstrap core JavaScript
+	================================================== -->
+
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+	<script>window.jQuery || document.write('<script src="~/Content/bootstrap/assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
+	<script src="~/Content/bootstrap/assets/js/vendor/popper.min.js"></script>
+	<script src="~/Content/bootstrap/dist/js/bootstrap.min.js"></script>
+	<script src="~/Content/bootstrap/assets/js/vendor/holder.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="9ad2a287b12b4b8aa0222a13824682a2" Name="Diagram1">
+        <EntityTypeShape EntityType="GemDBModel.Client" Width="1.5" PointX="0.75" PointY="1.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="GemDBModel.Director" Width="1.5" PointX="5.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="GemDBModel.EventManager" Width="1.5" PointX="3" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="GemDBModel.OrderEvent" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="GemDBModel.OrganizeEvent" Width="1.5" PointX="5.25" PointY="1.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="GemDBModel.Photographer" Width="1.5" PointX="0.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="GemDBModel.Vanue" Width="1.5" PointX="0.75" PointY="8.375" IsExpanded="true" />
+        <AssociationConnector Association="GemDBModel.FK_OrderEvents_Clients" ManuallyRouted="false" />
+        <AssociationConnector Association="GemDBModel.FK_OrganizeEvents_EventManager" ManuallyRouted="false" />
+        <AssociationConnector Association="GemDBModel.FK_OrderEvents_Photographers" ManuallyRouted="false" />
+        <AssociationConnector Association="GemDBModel.FK_OrderEvents_Vanues" ManuallyRouted="false" />
+        <AssociationConnector Association="GemDBModel.FK_OrganizeEvents_OrderEvents" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

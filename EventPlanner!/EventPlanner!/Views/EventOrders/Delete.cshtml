@@ -1,0 +1,108 @@
+﻿@{
+	Layout = null;
+}
+
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="description" content="">
+	<meta name="author" content="">
+	<link rel="icon" href="~/Content/asset/gem.png">
+
+	<title>Gem Events</title>
+	<!-- Bootstrap core CSS -->
+	<link href="~/Content/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+	<!--fontawesome-->
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+	<!-- Custom styles for this template -->
+	<link rel="stylesheet" href="~/Content/CSS/about.css">
+	<!--font-family : poppins-->
+	<link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,700,900" rel="stylesheet">
+	<!--font-family : Tangerine-->
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Tangerine">
+	<!--font-family : Dancing Script-->
+	<link href="https://fonts.googleapis.com/css?family=Cormorant+Garamond" rel="stylesheet">
+</head>
+<body>
+
+	
+
+	<div class="container">
+
+		<section class="jumbotron text-center">
+			<div class="container">
+				<h1 class="jumbotron-heading">Event Orders</h1>
+
+			</div>
+		</section>
+		@model EventPlanner_.EventOrder
+
+		@{
+			ViewBag.Title = "Delete";
+		}
+
+		<h2>Delete</h2>
+
+		<h3>Are you sure you want to delete this?</h3>
+		<div>
+			<h4>EventOrder</h4>
+			<hr />
+			<dl class="dl-horizontal">
+				<dt>
+					@Html.DisplayNameFor(model => model.EventType)
+				</dt>
+
+				<dd>
+					@Html.DisplayFor(model => model.EventType)
+				</dd>
+
+				<dt>
+					@Html.DisplayNameFor(model => model.DateOfEvent)
+				</dt>
+
+				<dd>
+					@Html.DisplayFor(model => model.DateOfEvent)
+				</dd>
+
+				<dt>
+					@Html.DisplayNameFor(model => model.Venue)
+				</dt>
+
+				<dd>
+					@Html.DisplayFor(model => model.Venue)
+				</dd>
+
+				<dt>
+					@Html.DisplayNameFor(model => model.NoOfGuest)
+				</dt>
+
+				<dd>
+					@Html.DisplayFor(model => model.NoOfGuest)
+				</dd>
+
+			</dl>
+
+			@using (Html.BeginForm())
+			{
+				@Html.AntiForgeryToken()
+
+				<div class="form-actions no-color">
+					<input type="submit" value="Delete" class="btn btn-default" /> |
+					@Html.ActionLink("Back to List", "Index")
+				</div>
+			}
+		</div>
+		
+
+	<!-- Bootstrap core JavaScript
+	================================================== -->
+
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+	<script>window.jQuery || document.write('<script src="~/Content/bootstrap/assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
+	<script src="~/Content/bootstrap/assets/js/vendor/popper.min.js"></script>
+	<script src="~/Content/bootstrap/dist/js/bootstrap.min.js"></script>
+	<script src="~/Content/bootstrap/assets/js/vendor/holder.min.js"></script>
+</body>
+</html>
